@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>For Priyanshi ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg1: #ffc0cb;
+            --bg2: #ff69b4;
+            --card: rgba(255, 255, 255, 0.25);
+            --accent: #ff1493;
+            --text: #ffffff;
+        }
+
+        body.night {
+            --bg1: #160a1d;
+            --bg2: #3a0f2f;
+            --card: rgba(255, 255, 255, 0.12);
+        }
+
+        body.proposal {
+            --bg1: #120014;
+            --bg2: #3b001f;
+            --card: rgba(255, 255, 255, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, var(--bg1), var(--bg2));
+            color: var(--text);
+            text-align: center;
+            overflow: hidden;
+            transition: background 1s ease;
+        }
+
+        .page {
+            max-width: 650px;
+            margin: 40px auto;
+            padding: 35px;
+            border-radius: 28px;
+            background: var(--card);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 25px 55px rgba(0, 0, 0, 0.35);
+
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+            display: none;
+
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page.active {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #final {
+            min-height: 70vh;
+            justify-content: center;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.7em;
+            color: var(--accent);
+            margin-bottom: 15px;
+            text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.35);
+        }
+
+        body.proposal h1 {
+            font-size: 3em;
+            color: #ff5fa2;
+        }
+
+        p {
+            font-size: 1.35em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 12px 0;
+            font-size: 1.15em;
+            cursor: pointer;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        button {
+            margin-top: 18px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 14px 36px;
+            border-radius: 40px;
+            font-size: 1.25em;
+            cursor: pointer;
+            box-shadow: 0 12px 22px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.08);
+            background: #e60073;
+        }
+
+        body.proposal #final button {
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 10px rgba(255, 20, 147, 0.4);
+            }
+
+            to {
+                box-shadow: 0 0 28px rgba(255, 20, 147, 0.9);
+            }
+        }
+
+        .heart {
+            width: 90px;
+            height: 80px;
+            margin: 20px auto;
+            position: relative;
+            animation: heartbeat 1.2s infinite;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 45px;
+            height: 70px;
+            background: var(--accent);
+            border-radius: 50px 50px 0 0;
+            top: 0;
+        }
+
+        .heart::before {
+            left: 45px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+        }
+
+        .confetti {
+            position: fixed;
+            top: -10%;
+            font-size: 2em;
+            animation: fall linear forwards;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(120vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .controls {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 5;
+        }
+
+        .controls button {
+            font-size: 0.9em;
+            padding: 8px 14px;
+            margin-left: 6px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="controls">
+        <button onclick="toggleMusic()">🎵 Music</button>
+        <button onclick="toggleNight()">🌙 Night</button>
+        <button onclick="proposalMode()">💍 Proposal</button>
+    </div>
+
+    <audio id="music" loop>
+        <source src="love.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- WELCOME -->
+    <div id="welcome" class="page active">
+        <h1>Hi Priyanshi 💖</h1>
+        <p>
+            This isn’t a website.<br>
+            It’s a feeling I turned into code…<br>
+            just for you.
+        </p>
+        <div class="heart"></div>
+        <button onclick="startMusic(); nextPage('welcome')">Begin 💫</button>
+    </div>
+
+    <!-- QUESTIONS -->
+    <div id="page1" class="page">
+        <h1>One</h1>
+        <p>When I think of you, what comes first?</p>
+        <label><input type="radio" name="q1"> Your smile</label>
+        <label><input type="radio" name="q1"> Your voice</label>
+        <label><input type="radio" name="q1"> The peace you give me</label>
+        <button onclick="nextPage('page1')">Next 💕</button>
+    </div>
+
+    <div id="page2" class="page">
+        <h1>Two</h1>
+        <p>How do I feel when you’re near?</p>
+        <label><input type="radio" name="q2"> Calm</label>
+        <label><input type="radio" name="q2"> Happy</label>
+        <label><input type="radio" name="q2"> Like I’m exactly where I belong</label>
+        <button onclick="nextPage('page2')">Next 💗</button>
+    </div>
+
+    <div id="page3" class="page">
+        <h1>Three</h1>
+        <p>What makes you different from everyone else?</p>
+        <label><input type="radio" name="q3"> You understand me</label>
+        <label><input type="radio" name="q3"> You inspire me</label>
+        <label><input type="radio" name="q3"> You chose me too</label>
+        <button onclick="nextPage('page3')">Next 💞</button>
+    </div>
+
+    <div id="page4" class="page">
+        <h1>Four</h1>
+        <p>If love was a choice…</p>
+        <label><input type="radio" name="q4"> I’d choose you</label>
+        <label><input type="radio" name="q4"> Again and again</label>
+        <label><input type="radio" name="q4"> In every lifetime</label>
+        <button onclick="nextPage('page4')">Next 💘</button>
+    </div>
+
+    <!-- FINAL -->
+    <div id="final" class="page">
+        <h1>Priyanshi ❤️</h1>
+        <p>
+            After every smile,<br>
+            every shy moment,<br>
+            every heartbeat…
+        </p>
+        <p style="font-size:1.7em;"><strong>You are my Valentine.</strong></p>
+
+        <div class="heart"></div>
+
+        <button onclick="revealNote()">💌 A Note for You</button>
+        <button onclick="saveMoment()">📸 Save This Moment</button>
+
+        <p id="note" style="display:none;margin-top:22px;font-size:1.25em;">
+            No matter where life takes us,<br>
+            choosing you will always be my favorite decision.<br>
+            — Hanish 💖
+        </p>
+    </div>
+
+    <script>
+        const order = ['welcome', 'page1', 'page2', 'page3', 'page4', 'final'];
+        const music = document.getElementById('music');
+
+        function startMusic() {
+            music.volume = 1;
+            music.play();
+        }
+
+        function nextPage(id) {
+            const page = document.getElementById(id);
+            if (id !== 'welcome' && !page.querySelector("input[type='radio']:checked")) {
+                alert("Choose one… I want your heart 💗");
+                return;
+            }
+            page.classList.remove('active');
+            const next = document.getElementById(order[order.indexOf(id) + 1]);
+            setTimeout(() => {
+                next.classList.add('active');
+                if (next.id === 'final') confetti();
+            }, 300);
+        }
+
+        function confetti() {
+            for (let i = 0; i < 90; i++) {
+                setTimeout(() => {
+                    const h = document.createElement('div');
+                    h.className = 'confetti';
+                    h.textContent = '❤️';
+                    h.style.left = Math.random() * 100 + 'vw';
+                    h.style.animationDuration = 4 + Math.random() * 3 + 's';
+                    document.body.appendChild(h);
+                    setTimeout(() => h.remove(), 7000);
+                }, i * 80);
+            }
+        }
+
+        function toggleMusic() {
+            music.paused ? music.play() : music.pause();
+        }
+
+        function toggleNight() {
+            document.body.classList.toggle('night');
+        }
+
+        function proposalMode() {
+            document.body.classList.toggle('proposal');
+            let vol = music.volume;
+            const fade = setInterval(() => {
+                vol > 0.35 ? vol -= 0.02 : clearInterval(fade);
+                music.volume = Math.max(vol, 0.35);
+            }, 100);
+        }
+
+        function revealNote() {
+            document.getElementById('note').style.display = 'block';
+        }
+
+        function saveMoment() {
+            alert("Take a screenshot ❤️ This moment is yours forever.");
+        }
+    </script>
+
+</body>
+
+</html>
